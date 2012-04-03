@@ -28,41 +28,6 @@ class Chef
         super
       end
 
-      def action_create
-        super
-        symlink
-      end
-
-      def symlink
-        purge_tempfiles_from_current_release
-        link_tempfiles_to_current_release
-        link_current_release_to_production
-        Chef::Log.info "#{@new_resource} updated symlinks"
-      end
-
-      def purge_tempfiles_from_current_release
-      end
-
-      def link_tempfiles_to_current_release
-      end
-
-      def link_current_release_to_production
-        FileUtils.rm_f(@new_resource.current_path)
-        begin
-          FileUtils.ln_sf(@new_resource.release_path, @new_resource.current_path)
-        rescue => e
-          raise Chef::Exceptions::FileNotFound.new("Cannot symlink current release to production: #{e.message}")
-        end
-        Chef::Log.info "#{@new_resource} linked release #{@new_resource.release_path} into production at #{@new_resource.current_path}"
-        enforce_ownership
-      end
-
-      def enforce_ownership
-        FileUtils.chown_R(@new_resource.user, @new_resource.group, @new_resource.deploy_to)
-        Chef::Log.info("#{@new_resource} set user to #{@new_resource.user}") if @new_resource.user
-        Chef::Log.info("#{@new_resource} set group to #{@new_resource.group}") if @new_resource.group
-      end
-
     end
   end
 end

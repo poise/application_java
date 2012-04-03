@@ -50,10 +50,6 @@ class Chef
         @release_path ||= @deploy_to + "/releases/#{checksum}.war"
       end
 
-      def current_path
-        @current_path ||= @deploy_to + "/current"
-      end
-
       def method_missing(name, *args, &block)
         Chef::Log.info "java_remote_file missing(#{name}, #{args.inspect}), ignoring it"
       end
