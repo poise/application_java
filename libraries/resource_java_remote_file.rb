@@ -31,19 +31,19 @@ class Chef
         super
         @resource_name = :java_remote_file
         @provider = Chef::Provider::JavaRemoteFile
+        @deploy_to = nil
       end
 
       def provider
         Chef::Provider::JavaRemoteFile
       end
 
-      def deploy_to(dir = nil)
-        if dir
-          @deploy_to = dir
-          path dir
-        else
-          @deploy_to
-        end
+      def deploy_to(args=nil)
+        set_or_return(
+          :deploy_to,
+          args,
+          :kind_of => String
+        )
       end
 
       def release_path
