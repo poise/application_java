@@ -25,6 +25,7 @@ class Chef
 
       alias :user :owner
       alias :revision :checksum
+      alias :repository :source
 
       def initialize(name, run_context=nil)
         super
@@ -43,10 +44,6 @@ class Chef
         else
           @deploy_to
         end
-      end
-
-      def repository(url)
-        source url
       end
 
       def release_path
