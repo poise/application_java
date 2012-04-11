@@ -28,6 +28,27 @@ end
 
 action :before_deploy do
 
+  create_hierarchy
+
+  create_context_file
+
+end
+
+action :before_migrate do
+end
+
+action :before_symlink do
+end
+
+action :before_restart do
+end
+
+action :after_restart do
+end
+
+protected
+
+def create_hierarchy
   directory "#{new_resource.path}/releases" do
     owner new_resource.owner
     group new_resource.group
@@ -43,7 +64,9 @@ action :before_deploy do
       recursive true
     end
   end
+end
 
+def create_context_file
   if new_resource.database_master_role
     dbm = new_resource.find_matching_role(new_resource.database_master_role)
 
@@ -67,17 +90,4 @@ action :before_deploy do
       Chef::Log.warn("No node with role #{new_resource.database_master_role}")
     end
   end
-
-end
-
-action :before_migrate do
-end
-
-action :before_symlink do
-end
-
-action :before_restart do
-end
-
-action :after_restart do
 end
