@@ -99,7 +99,6 @@ context file for other reasons), you can specify your own template:
 
       java_webapp do
         context_template "jenkins-context.xml.erb"
-        database_master_role "database_master"  # FIXME
       end
 
       tomcat
