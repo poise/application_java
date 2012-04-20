@@ -36,7 +36,7 @@ NOTICE: the `application` cookbook was designed around frameworks running on int
 # Attribute Parameters
 
 - database\_master\_role: if a role name is provided, a Chef search will be run to find a node with than role in the same environment as the current role. If a node is found, its IP address will be used when rendering the context file, but see the "Database block parameters" section below
-- context\_template: the name of template that will be rendered to create the context file; the file will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
+- context\_template: the name of template that will be rendered to create the context file; if specified it will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
 - database: a block containing additional parameters for configuring the database connection (see below)
 
 # Database block parameters
