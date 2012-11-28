@@ -28,6 +28,14 @@ class Chef
         super
       end
 
+      def action_deploy
+        action_create
+      end
+
+      def action_force_deploy
+        action_create
+      end
+
     end
   end
 end

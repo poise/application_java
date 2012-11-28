@@ -32,6 +32,7 @@ class Chef
         @resource_name = :java_remote_file
         @provider = Chef::Provider::JavaRemoteFile
         @deploy_to = nil
+        @allowed_actions.push(:deploy,:force_deploy)
       end
 
       def provider

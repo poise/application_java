@@ -132,7 +132,8 @@ License and Author
 ==================
 
 Author:: Adam Jacob (<adam@opscode.com>)
-Author:: Andrea Campi (<andrea.campi@zephirworks.com.com>)
+Author:: Andrea Campi (<andrea.campi@zephirworks.com>)
+Author:: Jesse Campbell (<hikeit@gmail.com>)
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Seth Chisamore (<schisamo@opscode.com>)
 
