@@ -22,8 +22,9 @@ include Chef::Mixin::LanguageIncludeRecipe
 action :before_compile do
 
   # include_recipe 'java'
-
-  new_resource.strategy :java_remote_file
+	unless new_resource.defined?( strategy )
+		new_resource.strategy :java_remote_file
+	end
 end
 
 action :before_deploy do
