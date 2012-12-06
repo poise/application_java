@@ -1,3 +1,7 @@
+## v1.0.2:
+
+* Support deploying local files
+
 ## v1.0.1:
 
 * [COOK-1680] - Add deploy action (alias for create) to java_remote_file

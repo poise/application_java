@@ -29,7 +29,7 @@ The LWRPs provided by this cookbook are not meant to be used by themselves; make
 java_webapp
 -----------
 
-The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will be retrieved from a remote URL.
+The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will be either be retrieved from a remote URL or fetched by some other method and referenced locally.
 
 NOTICE: the `application` cookbook was designed around frameworks running on interpreted languages that are deployed in source code, checked out of an SCM using the `deploy_revision` resource. While this cookbook tries to map those concepts to a binary distribution mechanism, it may not map exactly.
 
@@ -38,6 +38,7 @@ NOTICE: the `application` cookbook was designed around frameworks running on int
 - database\_master\_role: if a role name is provided, a Chef search will be run to find a node with than role in the same environment as the current role. If a node is found, its IP address will be used when rendering the context file, but see the "Database block parameters" section below
 - context\_template: the name of template that will be rendered to create the context file; if specified it will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
 - database: a block containing additional parameters for configuring the database connection (see below)
+- strategy: if specified, allows overriding the default :java_remote_file with an alternate deploy strategy. use :java_local_file for files fetched externally, available on the filesystem
 
 # Database block parameters
 
@@ -59,6 +60,16 @@ tomcat
 ------
 
 The `tomcat` sub-resource LWRP configures Tomcat to run the application by creating a symbolic link to the context file.
+
+Attributes
+==========
+
+path: the target location for the application distribution. This should be outside of the tomcat deployment tree.
+repository:
+	- java_remote_file uses repository as the remote URL
+	- java_local_file uses repository as the source file location on the disk
+revision: name of the war file on disk, should change with each new version
+
 
 Usage
 =====
