@@ -38,7 +38,6 @@ NOTICE: the `application` cookbook was designed around frameworks running on int
 - database\_master\_role: if a role name is provided, a Chef search will be run to find a node with than role in the same environment as the current role. If a node is found, its IP address will be used when rendering the context file, but see the "Database block parameters" section below
 - context\_template: the name of template that will be rendered to create the context file; if specified it will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
 - database: a block containing additional parameters for configuring the database connection (see below)
-- strategy: if specified, allows overriding the default :java_remote_file with an alternate deploy strategy. use :java_local_file for files fetched externally, available on the filesystem
 
 # Database block parameters
 
@@ -64,6 +63,9 @@ The `tomcat` sub-resource LWRP configures Tomcat to run the application by creat
 Attributes
 ==========
 
+strategy: required to be one of
+	:java_remote_file allows downloading from a remote http url
+	:java_local_file allows using a package on the filesystem
 path: the target location for the application distribution. This should be outside of the tomcat deployment tree.
 repository:
 	- java_remote_file uses repository as the remote URL
@@ -80,6 +82,7 @@ A sample application that needs a database connection:
       path "/usr/local/my-app"
       repository "..."
       revision "..."
+			strategy :java_local_file
 
       java_webapp do
         database_master_role "database_master"
@@ -107,6 +110,7 @@ context file for other reasons), you can specify your own template:
       group node["tomcat"]["group"]
       repository "http://mirrors.jenkins-ci.org/war/latest/jenkins.war"
       revision "6facd94e958ecf68ffd28be371b5efcb5584c885b5f32a906e477f5f62bdb518-1"
+			strategy :java_remote_file
 
       java_webapp do
         context_template "jenkins-context.xml.erb"
