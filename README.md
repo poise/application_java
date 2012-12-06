@@ -29,7 +29,7 @@ The LWRPs provided by this cookbook are not meant to be used by themselves; make
 java_webapp
 -----------
 
-The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will be either be retrieved from a remote URL or fetched by some other method and referenced locally.
+The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will either be retrieved from a remote URL or fetched by some other method and referenced locally.
 
 NOTICE: the `application` cookbook was designed around frameworks running on interpreted languages that are deployed in source code, checked out of an SCM using the `deploy_revision` resource. While this cookbook tries to map those concepts to a binary distribution mechanism, it may not map exactly.
 
