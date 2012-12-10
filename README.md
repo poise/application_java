@@ -29,7 +29,7 @@ The LWRPs provided by this cookbook are not meant to be used by themselves; make
 java_webapp
 -----------
 
-The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will be retrieved from a remote URL.
+The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will either be retrieved from a remote URL or fetched by some other method and referenced locally.
 
 NOTICE: the `application` cookbook was designed around frameworks running on interpreted languages that are deployed in source code, checked out of an SCM using the `deploy_revision` resource. While this cookbook tries to map those concepts to a binary distribution mechanism, it may not map exactly.
 
@@ -60,6 +60,19 @@ tomcat
 
 The `tomcat` sub-resource LWRP configures Tomcat to run the application by creating a symbolic link to the context file.
 
+Attributes
+==========
+
+strategy: required to be one of
+	:java_remote_file allows downloading from a remote http url
+	:java_local_file allows using a package on the filesystem
+path: the target location for the application distribution. This should be outside of the tomcat deployment tree.
+repository:
+	- java_remote_file uses repository as the remote URL
+	- java_local_file uses repository as the source file location on the disk
+revision: name of the war file on disk, should change with each new version
+
+
 Usage
 =====
 
@@ -69,6 +82,7 @@ A sample application that needs a database connection:
       path "/usr/local/my-app"
       repository "..."
       revision "..."
+			strategy :java_local_file
 
       java_webapp do
         database_master_role "database_master"
@@ -96,6 +110,7 @@ context file for other reasons), you can specify your own template:
       group node["tomcat"]["group"]
       repository "http://mirrors.jenkins-ci.org/war/latest/jenkins.war"
       revision "6facd94e958ecf68ffd28be371b5efcb5584c885b5f32a906e477f5f62bdb518-1"
+			strategy :java_remote_file
 
       java_webapp do
         context_template "jenkins-context.xml.erb"
@@ -132,7 +147,8 @@ License and Author
 ==================
 
 Author:: Adam Jacob (<adam@opscode.com>)
-Author:: Andrea Campi (<andrea.campi@zephirworks.com.com>)
+Author:: Andrea Campi (<andrea.campi@zephirworks.com>)
+Author:: Jesse Campbell (<hikeit@gmail.com>)
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Seth Chisamore (<schisamo@opscode.com>)
 

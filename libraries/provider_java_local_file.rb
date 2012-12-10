@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: application_java
-# Library:: provider_java_remote_file
+# Library:: provider_java_local_file
 #
 # Copyright 2012, ZephirWorks
 #
@@ -17,11 +17,12 @@
 # limitations under the License.
 #
 
-require 'chef/provider/remote_file'
+require 'chef/provider/file'
 
 class Chef
   class Provider
-    class JavaRemoteFile < Chef::Provider::RemoteFile
+		class File
+			class JavaLocalFile < Chef::Provider::File
 
       def load_current_resource
         @new_resource.path @new_resource.release_path
@@ -32,10 +33,23 @@ class Chef
         action_create
       end
 
-      def action_force_deploy
-        action_create
-      end
+			def action_force_deploy
+				action_create
+			end
 
+			def set_content
+				unless compare_content
+					backup @new_resource.path if ::File.exists?(@new_resource.path)
+					::FileUtils.cp_r(@new_resource.content, @new_resource.path)
+					Chef::Log.info("#{@new_resource.content} copied to #{@new_resource.path}")
+					@new_resource.updated_by_last_action(true)
+				end
+			end
+
+			def compare_content
+				checksum(@current_resource.path) == checksum(@new_resource.content)
+			end
+			end
     end
   end
 end

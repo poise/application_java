@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: application_java
-# Library:: resource_java_remote_file
+# Library:: resource_java_local_file
 #
 # Copyright 2012, ZephirWorks
 #
@@ -17,26 +17,25 @@
 # limitations under the License.
 #
 
-require 'chef/resource/remote_file'
+require 'chef/resource/file'
 
 class Chef
   class Resource
-    class JavaRemoteFile < Chef::Resource::RemoteFile
+    class JavaLocalFile < Chef::Resource::File
 
       alias :user :owner
-      alias :revision :checksum
-      alias :repository :source
+      alias :repository :content
 
       def initialize(name, run_context=nil)
         super
-        @resource_name = :java_remote_file
-        @provider = Chef::Provider::JavaRemoteFile
+        @resource_name = :java_local_file
+        @provider = Chef::Provider::File::JavaLocalFile
         @deploy_to = nil
         @allowed_actions.push(:deploy,:force_deploy)
       end
 
       def provider
-        Chef::Provider::JavaRemoteFile
+        Chef::Provider::File::JavaLocalFile
       end
 
       def deploy_to(args=nil)
@@ -47,12 +46,20 @@ class Chef
         )
       end
 
+      def revision(arg=nil)
+        set_or_return(
+          :checksum,
+          arg,
+          :kind_of => String
+        )
+      end
+
       def release_path
-        @release_path ||= @deploy_to + "/releases/#{checksum}.war"
+        @release_path ||= @deploy_to + "/releases/#{revision}.war"
       end
 
       def method_missing(name, *args, &block)
-        Chef::Log.info "java_remote_file missing(#{name}, #{args.inspect}), ignoring it"
+        Chef::Log.info "java_local_file missing(#{name}, #{args.inspect}), ignoring it"
       end
 
     end

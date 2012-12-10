@@ -20,10 +20,6 @@
 include Chef::Mixin::LanguageIncludeRecipe
 
 action :before_compile do
-
-  # include_recipe 'java'
-
-  new_resource.strategy :java_remote_file
 end
 
 action :before_deploy do
