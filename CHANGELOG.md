@@ -1,6 +1,6 @@
-## v1.0.1:
+## v1.0.2:
 
-* [COOK-1680] - Add deploy action (alias for create) to java_remote_file
+* [COOK-1680] - Add deploy action (alias for create) to `java_remote_file`
 
 ## v1.0.0:
 
