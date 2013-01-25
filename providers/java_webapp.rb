@@ -67,7 +67,7 @@ def create_context_file
 
   template "#{new_resource.path}/shared/#{new_resource.application.name}.xml" do
     source new_resource.context_template || "context.xml.erb"
-    cookbook new_resource.context_template ? new_resource.cookbook_name : "application_java"
+    cookbook new_resource.context_template ? new_resource.cookbook_name.to_s : "application_java"
     owner new_resource.owner
     group new_resource.group
     mode "644"
