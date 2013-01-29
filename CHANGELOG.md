@@ -1,3 +1,7 @@
+## v1.0.4:
+
+* [COOK-2271] - ValidationFailed error in `java_webapp` provider
+
 ## v1.0.2:
 
 * [COOK-1680] - Add deploy action (alias for create) to `java_remote_file`
