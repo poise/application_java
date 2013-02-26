@@ -63,15 +63,22 @@ The `tomcat` sub-resource LWRP configures Tomcat to run the application by creat
 Attributes
 ==========
 
-strategy: required to be one of
-	:java_remote_file allows downloading from a remote http url
-	:java_local_file allows using a package on the filesystem
-path: the target location for the application distribution. This should be outside of the tomcat deployment tree.
-repository:
-	- java_remote_file uses repository as the remote URL
-	- java_local_file uses repository as the source file location on the disk
-revision: name of the war file on disk, should change with each new version
+strategy
+--------
 
+required to be one of:
+* java_remote_file allows downloading from a remote http url
+* java_local_file allows using a package on the filesystem
+
+path
+----
+
+The target location for the application distribution. This should be outside of the tomcat deployment tree.
+
+* repository:
+ * java_remote_file uses repository as the remote URL
+ * java_local_file uses repository as the source file location on the disk
+* revision: name of the war file on disk, should change with each new version
 
 Usage
 =====
