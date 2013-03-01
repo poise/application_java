@@ -64,15 +64,29 @@ The `tomcat` sub-resource LWRP configures Tomcat to run the application by creat
 Attributes
 ==========
 
-* scm\_provider: required to be one of
-	Chef::Provider::RemoteFile::Deploy allows downloading from a remote url
-	Chef::Provider::File::Deploy allows using a package on the filesystem
-* path: the target location for the application distribution. This should be outside of the tomcat deployment tree.
-* revision: name of the path within releases, defaults to the checksum of the downloaded file
-* repository:
-	- RemoteFile::Deploy uses repository as the remote URL
-	- File::Deploy uses repository as the source file location on the disk
+scm\_provider
+------------
 
+Supports all standard scm providers (git, svn), and in addition:
+*	Chef::Provider::RemoteFile::Deploy allows downloading from a remote url
+*	Chef::Provider::File::Deploy allows using a package on the filesystem
+
+path
+----
+
+The target location for the application distribution. This should be outside of the tomcat deployment tree.
+
+repository
+----------
+
+For a git or svn repository, it is the repository URL
+When using Chef::Provider::RemoteFile::Deploy, it is the URL of the remote file
+When using Chef::Provider::File::Deploy, it is the path to the local file source
+
+revision
+--------
+
+Name of the path within releases, defaults to the checksum of the downloaded file
 
 Usage
 =====
