@@ -50,7 +50,7 @@ class Chef
 
         def action_sync
           create_dir_unless_exists(@deploy_resource.destination)
-          purge_old_downloads
+          purge_old_staged_files
           action_create
           @new_resource.checksum checksum(@new_resource.path)
         end
@@ -94,11 +94,11 @@ class Chef
           end
         end
 
-        def purge_old_downloads
-          converge_by("purge old downloads") do
+        def purge_old_staged_files
+          converge_by("purge old staged files") do
             Dir.glob( "#{@deploy_resource.destination}/*" ).each do |direntry|
               FileUtils.rm_rf( direntry ) unless direntry == @new_resource.path
-              Chef::Log.info("#{@new_resource} purged old download #{direntry}")
+              Chef::Log.info("#{@new_resource} purged old file #{direntry}")
             end
           end
         end
