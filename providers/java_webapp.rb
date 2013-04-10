@@ -45,13 +45,6 @@ end
 protected
 
 def create_hierarchy
-  directory "#{new_resource.path}/releases" do
-    owner new_resource.owner
-    group new_resource.group
-    mode '0755'
-    recursive true
-  end
-
   %w{ log pids system }.each do |dir|
     directory "#{new_resource.path}/shared/#{dir}" do
       owner new_resource.owner
@@ -76,7 +69,7 @@ def create_context_file
       :app => new_resource.application.name,
       :host => host,
       :database => new_resource.database,
-      :war => "#{new_resource.path}/releases/#{new_resource.application.revision}.war"
+      :war => "#{new_resource.path}/current/#{new_resource.war || ::File.basename(new_resource.application.repository)}"
     )
   end
 end
