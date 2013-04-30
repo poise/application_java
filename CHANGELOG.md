@@ -1,3 +1,10 @@
+## v1.1.0:
+
+### Bug
+
+- [COOK-2523]: deployments do not follow standards set by the Deploy
+  provider
+
 ## v1.0.4:
 
 * [COOK-2271] - ValidationFailed error in `java_webapp` provider
