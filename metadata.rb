@@ -6,6 +6,9 @@ description      "Deploys and configures Java-based applications"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.1.1"
 
-%w{ application java tomcat }.each do |cb|
+%w{ java tomcat }.each do |cb|
   depends cb
 end
+
+depends "application", "~> 3.0"
+

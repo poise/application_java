@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-include Chef::Resource::ApplicationBase
+include ApplicationCookbook::ResourceBase
