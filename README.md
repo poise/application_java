@@ -26,14 +26,14 @@ Resources/Providers
 The LWRPs provided by this cookbook are not meant to be used by themselves; make sure you are familiar with the `application` cookbook before proceeding.
 
 
-### `java\_webapp`
-The `java\_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will either be retrieved from a remote URL or fetched by some other method and referenced locally.
+### `java_webapp`
+The `java_webapp` sub-resource LWRP deals with deploying Java webapps delivered as WAR files which will either be retrieved from a remote URL or fetched by some other method and referenced locally.
 
 NOTICE: the `application` cookbook was designed around frameworks running on interpreted languages that are deployed in source code, checked out of an SCM using the `deploy_revision` resource. While this cookbook tries to map those concepts to a binary distribution mechanism, it may not map exactly.
 
 #### Attribute Parameters
-- database\_master\_role: if a role name is provided, a Chef search will be run to find a node with than role in the same environment as the current role. If a node is found, its IP address will be used when rendering the context file, but see the "Database block parameters" section below
-- context\_template: the name of template that will be rendered to create the context file; if specified it will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
+- database_master_role: if a role name is provided, a Chef search will be run to find a node with than role in the same environment as the current role. If a node is found, its IP address will be used when rendering the context file, but see the "Database block parameters" section below
+- context_template: the name of template that will be rendered to create the context file; if specified it will be looked up in the application cookbook. Defaults to "context.xml.erb" from this cookbook
 - database: a block containing additional parameters for configuring the database connection (see below)
 - war: if provided, will override the default of the basename of the repository
 
@@ -41,14 +41,14 @@ NOTICE: the `application` cookbook was designed around frameworks running on int
 The database block can accept any method, with the following being expected by the stock context.xml.erb:
 
 - driver: a fully-qualified class name of the JDBC driver
-- host: hostname or IP address of the database server; if set it will take precedence over the address returned from the search for database\_master\_role
+- host: hostname or IP address of the database server; if set it will take precedence over the address returned from the search for database_master_role
 - port: port to use to connect to the database server
 - database
 - username
 - password
-- max\_active: used to set the maxActive context parameter
-- max\_idle: used to set the maxIdle context parameter
-- max\_wait: used to set the maxWait context parameter
+- max_active: used to set the maxActive context parameter
+- max_idle: used to set the maxIdle context parameter
+- max_wait: used to set the maxWait context parameter
 
 You can invoke any other method on the database block, which will result in an entry being created in the `@database` Hash which is passed to the context template. See the examples below for more information.
 
@@ -58,7 +58,7 @@ The `tomcat` sub-resource LWRP configures Tomcat to run the application by creat
 
 Attributes
 ----------
-### scm\_provider
+### scm_provider
 Supports all standard scm providers (git, svn), and in addition:
 *	Chef::Provider::RemoteFile::Deploy allows downloading from a remote url
 *	Chef::Provider::File::Deploy allows using a package on the filesystem
@@ -160,7 +160,7 @@ License & Authors
 - Author:: Seth Chisamore (schisamo@opscode.com)
 
 ```text
-Copyright 2009-2012, Opscode, Inc.
+Copyright 2009-2013, Opscode, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
