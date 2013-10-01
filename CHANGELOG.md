@@ -3,6 +3,14 @@ application_java Cookbook CHANGELOG
 This file is used to list changes made in each version of the application_java cookbook.
 
 
+v3.0.0
+------
+### Breaking
+- Drops support for Chef 10
+
+### Improvement
+- **[COOK-3563](https://tickets.opscode.com/browse/COOK-3563)** - Replace calls to `Chef::Mixin::RecipeDefinitionDSLCore`
+
 v2.0.0
 ------
 ### Bug
